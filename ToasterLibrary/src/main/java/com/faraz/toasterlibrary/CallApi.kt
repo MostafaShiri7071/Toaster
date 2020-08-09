@@ -24,7 +24,7 @@ class CallApi : BaseShiri() {
                     }
 
                     override fun onError(e: Throwable) {
-
+                        val er=e.message
                     }
 
                 })
