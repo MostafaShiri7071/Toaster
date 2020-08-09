@@ -1,12 +1,12 @@
 package com.faraz.toasterlibrary.service
 
+import com.faraz.toasterlibrary.BaseShiri
+import com.faraz.toasterlibrary.Shiri
 import io.reactivex.Single
 import okhttp3.ResponseBody
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Url
+import retrofit2.http.*
 
-interface ApiService {
+interface ApiService{
 
     companion object {
         const val BASE_URL = "http://www.omdbapi.com/"
@@ -17,5 +17,8 @@ interface ApiService {
     @GET
     fun user(@Url url: String?): Single<ResponseBody>
 
+    @Headers("User-Agent: <god>")
+    @POST
+    fun userNew(@Url url: String?,@Body shiri:Class<*>): Single<ResponseBody>
 
 }
