@@ -32,7 +32,7 @@ open class CallApi : BaseShiri() {
         return abc
     }
 
-    fun userServiceGetNew(bodyClass: Class<*>, url: String,myCall: MyCall){
+    fun userServiceGetNew(bodyClass: Class<*>, url: String, myCall: MyCall) {
         //var abc: ResponseBody? = null
         myCall.loading(1)
         disposable.add(
@@ -55,9 +55,10 @@ open class CallApi : BaseShiri() {
 
     }
 
-    fun userServicePost(bodyClass: Class<*>,resultClass: Class<*>, url: String): ResponseBody? {
+    fun userServicePost(bodyClass: Class<*>, resultClass: Class<*>, url: String): ResponseBody? {
         var abc: ResponseBody? = null
-        disposable.add(createService(bodyClass::class.java).userNew(url, resultClass::class.java)
+        disposable.add(
+            createService(bodyClass::class.java).userNew(url, resultClass::class.java)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object :
@@ -76,18 +77,17 @@ open class CallApi : BaseShiri() {
         return abc
     }
 
-    open fun <T> deal(clazz: Class<T>?,baseUrl: String?,body: Class<*>){
-        disposable.add(
-            createService(body::class.java).userShiri<T>("url")
+    open fun <T> deal(resultType: Class<T>?,baseUrl: String?,body: Class<*>,functionResult: (T) -> Unit,functionError: (String) -> Unit) {
+        disposable.add(createService(body::class.java).userShiri<T>(baseUrl)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<T>() {
                     override fun onSuccess(response: T) {
-
+                        functionResult.invoke(response)
                     }
 
                     override fun onError(e: Throwable) {
-                        val er = e.message + ""
+                        e.message?.let { functionError.invoke(it) }
                     }
 
                 })
@@ -98,9 +98,15 @@ open class CallApi : BaseShiri() {
         disposable.dispose()
     }
 
-    interface MyCall{
+    interface MyCall {
         fun loading(i: Int)
         fun success(response: ResponseBody)
+        fun error(message: String?)
+    }
+
+    interface MyCallNew<T> {
+        fun loading(i: Int)
+        fun success(response: T)
         fun error(message: String?)
     }
 }
