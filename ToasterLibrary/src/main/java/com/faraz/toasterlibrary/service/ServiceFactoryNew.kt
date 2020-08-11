@@ -52,11 +52,11 @@ object ServiceFactoryNew {
         return GsonConverterFactory.create(gson)
     }
 
-    fun createWebServiceStatic(resultClass: Class<*>?): ApiService {
+    /*fun createWebServiceStatic(resultClass: Class<*>?): ApiService {
         return createRetrofitService(
             ApiService::class.java,
             BASE_URL,
             resultClass
         )
-    }
+    }*/
 }

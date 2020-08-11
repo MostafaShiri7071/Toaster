@@ -6,8 +6,8 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.ResponseBody
 
-class CallApiNew<T> : BaseShiri() {
-
+class CallApiNew<T> : BaseShiri<T>() {
+/*
     private val disposable = CompositeDisposable()
 
     fun userServiceGet(bodyClass: Class<*>, url: String): ResponseBody? {
@@ -74,9 +74,9 @@ class CallApiNew<T> : BaseShiri() {
 
         return abc
     }
-
+*/
     fun dispose() {
-        disposable.dispose()
+       // disposable.dispose()
     }
 
     interface MyCall{
