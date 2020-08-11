@@ -21,11 +21,11 @@ public class ServiceFactory {
      * @param resultClass
      * @return retrofit service with defined endpoint
      */
-    public static <T> T createRetrofitService(final Class<T> clazz, final String baseUrl, Class resultClass) {
+    public static <T,E> T createRetrofitService(final Class<T> clazz, final String baseUrl, E resultClass) {
         return getClient(baseUrl, resultClass).create(clazz);
     }
 
-    public static Retrofit getClient(final String baseUrl, Class resultClass) {
+    public static <E> Retrofit getClient(final String baseUrl, E resultClass) {
         RequestInterceptor interceptor = new RequestInterceptor();
         client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
@@ -50,7 +50,7 @@ public class ServiceFactory {
         return GsonConverterFactory.create(gson);
     }
 
-    public static ApiService createWebServiceStatic(Class resultClass) {
+    public static <T>ApiService createWebServiceStatic(T resultClass) {
         return ServiceFactory.createRetrofitService(ApiService.class, ApiConstants.Companion.getBASE_URL(), resultClass);
     }
 }

@@ -6,7 +6,7 @@ import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
-interface ApiService{
+interface ApiService<T>{
 
     companion object {
         const val BASE_URL = "http://www.omdbapi.com/"

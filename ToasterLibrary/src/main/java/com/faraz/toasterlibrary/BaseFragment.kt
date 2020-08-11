@@ -8,9 +8,9 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 
-abstract class BaseShiri{
+abstract class BaseShiri<T>{
 
-    fun createService(resultClass: Class<*>): ApiService {
+    fun <T> createService(resultClass:T): ApiService<*>? {
         return ServiceFactory.createWebServiceStatic(resultClass)
     }
 

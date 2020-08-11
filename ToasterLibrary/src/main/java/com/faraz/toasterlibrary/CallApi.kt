@@ -7,10 +7,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import okhttp3.ResponseBody
 
 
-open class CallApi : BaseShiri() {
+open class CallApi<T> : BaseShiri<T>() {
 
     private val disposable = CompositeDisposable()
-
+/*
     fun userServiceGet(bodyClass: Class<*>, url: String): ResponseBody? {
         var abc: ResponseBody? = null
         disposable.add(
@@ -76,12 +76,11 @@ open class CallApi : BaseShiri() {
 
         return abc
     }
-
-    open fun <T> deal(resultType: Class<T>?,baseUrl: String?,body: Class<*>,functionResult: (T) -> Unit,functionError: (String) -> Unit) {
-        disposable.add(createService(body::class.java).userShiri<T>(baseUrl)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<T>() {
+*/
+    open fun <T>  deal(resultType: Class<T>,baseUrl: String?,body: Class<*>,functionResult: (T) -> Unit,functionError: (String) -> Unit,result:Class<*>) {
+        disposable.add(createService(body::class.java)?.userShiri<T>(baseUrl)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())!!.subscribeWith(object : DisposableSingleObserver<T>() {
                     override fun onSuccess(response: T) {
                         functionResult.invoke(response)
                     }
