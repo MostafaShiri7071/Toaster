@@ -1,4 +1,4 @@
-package com.faraz.toasterlibrary.service
+package com.faraz.toasterlibrary.base.service
 
 import com.faraz.toasterlibrary.BaseShiri
 import com.faraz.toasterlibrary.Shiri
@@ -18,11 +18,19 @@ interface ApiService{
     fun user(@Url url: String?): Single<ResponseBody>
 
     @Headers("User-Agent: <god>")
+    @POST
+    fun userNew(@Url url: String?,@Body shiri:Class<*>): Single<ResponseBody>
+
+    @Headers("User-Agent: <god>")
     @GET
-    fun <T> userShiri(@Url url: String?): Single<T>
+    fun getTypeMethod(@Url url: String?): Single<ResponseBody>
+
+    @Headers("User-Agent: <god>")
+    @GET
+    fun getTypeMethodNew(@Url url: String?): Single<Class<*>>
 
     @Headers("User-Agent: <god>")
     @POST
-    fun userNew(@Url url: String?,@Body shiri:Class<*>): Single<ResponseBody>
+    fun postTypeMethod(@Url url: String?,@Body body:Class<*>): Single<ResponseBody>
 
 }

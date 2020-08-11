@@ -1,5 +1,9 @@
-package com.faraz.toasterlibrary.service;
+package com.faraz.toasterlibrary.base.service;
 
+import com.faraz.toasterlibrary.service.ApiConstants;
+import com.faraz.toasterlibrary.service.ApiService;
+import com.faraz.toasterlibrary.service.RequestInterceptor;
+import com.faraz.toasterlibrary.service.StringAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
@@ -36,7 +40,7 @@ public class ServiceFactory {
 
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                //.addConverterFactory(getJsonConverter(resultClass))
+                .addConverterFactory(getJsonConverter(resultClass))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
