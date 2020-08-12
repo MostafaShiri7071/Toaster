@@ -1,5 +1,6 @@
 package com.faraz.toasterlibrary.shiri
 
+import com.google.gson.JsonElement
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -18,6 +19,26 @@ class CallApiNew: MyBaee() {
                 override fun onSubscribe(d: Disposable) {}
 
                 override fun onNext(t: Any) {
+                    functionResult.invoke(t)
+                }
+
+                override fun onError(e: Throwable) {
+                    e.message?.let { functionError.invoke(it) }
+                }
+
+            })
+    }
+
+     fun  deal(resultType: Class<JsonElement>,baseUrl: String?,functionResult: (JsonElement) -> Unit,functionError: (String) -> Unit) {
+        val servoce=createService(resultType).user(baseUrl)
+        servoce.subscribeOn(Schedulers.newThread())?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(object: Observer<JsonElement> {
+                override fun onComplete() {
+                }
+
+                override fun onSubscribe(d: Disposable) {}
+
+                override fun onNext(t: JsonElement) {
                     functionResult.invoke(t)
                 }
 

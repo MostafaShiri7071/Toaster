@@ -1,5 +1,6 @@
 package com.faraz.toasterlibrary.shiri.service
 
+import com.google.gson.JsonElement
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.ResponseBody
@@ -15,5 +16,9 @@ interface ApiService{
     @Headers("User-Agent: <god>")
     @GET
     fun <Any> userShiriNew(@Url url: String?): Observable<Any>
+
+    @Headers("User-Agent: <god>")
+    @GET
+    fun user(@Url url: String?): Observable<JsonElement>
 
 }
