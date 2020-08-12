@@ -89,8 +89,8 @@ class CallApiNew: MyBaee() {
             })
     }
 
-    fun  dealPost(body:Class<*>,baseUrl: String?,functionResult: (JsonElement) -> Unit,functionError: (String) -> Unit) {
-        val servoce=createService(Void::class.java).userPost(baseUrl,body::class.java)
+    fun  dealPost(body:Any,baseUrl: String?,functionResult: (JsonElement) -> Unit,functionError: (String) -> Unit) {
+        val servoce=createService(Void::class.java).userPost(baseUrl,body)
         servoce.subscribeOn(Schedulers.newThread())?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(object: Observer<JsonElement> {
                 override fun onComplete() {
@@ -109,8 +109,8 @@ class CallApiNew: MyBaee() {
             })
     }
 
-    fun  dealPostNew(body:Class<*>,baseUrl: String?,functionResult: (JsonElement) -> Unit,functionError: (String) -> Unit) {
-        val servoce=createService(body).userPost(baseUrl,body::class.java)
+    fun  dealPostNew(body:Any,baseUrl: String?,functionResult: (JsonElement) -> Unit,functionError: (String) -> Unit) {
+        val servoce=createService(body::class.java).userPost(baseUrl,body)
         servoce.subscribeOn(Schedulers.newThread())?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(object: Observer<JsonElement> {
                 override fun onComplete() {
