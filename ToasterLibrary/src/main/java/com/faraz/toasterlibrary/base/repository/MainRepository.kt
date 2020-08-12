@@ -2,15 +2,14 @@ package com.faraz.toasterlibrary.base.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.faraz.toasterlibrary.base.response.Resource
-import com.faraz.toasterlibrary.service.ApiService
+import com.faraz.toasterlibrary.shiri.service.ApiService
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Response
 import okhttp3.ResponseBody
 
-class MainRepository(private val apiService: com.faraz.toasterlibrary.base.service.ApiService){
+class MainRepository(private val apiService: ApiService){
     var disposable: Disposable? = null
     var progress = MutableLiveData<Int>()
     var error = MutableLiveData<String>()

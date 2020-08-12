@@ -1,8 +1,11 @@
-package com.faraz.toasterlibrary.service;
+package com.faraz.toasterlibrary.shiri.service;
 
+import com.faraz.toasterlibrary.service.StringAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -21,11 +24,11 @@ public class ServiceFactory {
      * @param resultClass
      * @return retrofit service with defined endpoint
      */
-    public static <T,E> T createRetrofitService(final Class<T> clazz, final String baseUrl, E resultClass) {
+    public static <T> T createRetrofitService(final Class<T> clazz, final String baseUrl, Class resultClass) {
         return getClient(baseUrl, resultClass).create(clazz);
     }
 
-    public static <E> Retrofit getClient(final String baseUrl, E resultClass) {
+    public static Retrofit getClient(final String baseUrl, Class resultClass) {
         RequestInterceptor interceptor = new RequestInterceptor();
         client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
@@ -36,7 +39,7 @@ public class ServiceFactory {
 
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                //.addConverterFactory(getJsonConverter(resultClass))
+                .addConverterFactory(getJsonConverter(resultClass))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
@@ -50,7 +53,7 @@ public class ServiceFactory {
         return GsonConverterFactory.create(gson);
     }
 
-    public static <T> ApiService createWebServiceStatic(T resultClass) {
+    public static ApiService createWebServiceStatic(Class resultClass) {
         return ServiceFactory.createRetrofitService(ApiService.class, ApiConstants.Companion.getBASE_URL(), resultClass);
     }
 }

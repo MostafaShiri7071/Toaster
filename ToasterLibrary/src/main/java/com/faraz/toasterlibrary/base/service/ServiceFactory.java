@@ -1,8 +1,8 @@
 package com.faraz.toasterlibrary.base.service;
 
-import com.faraz.toasterlibrary.service.ApiConstants;
-import com.faraz.toasterlibrary.service.ApiService;
-import com.faraz.toasterlibrary.service.RequestInterceptor;
+import com.faraz.toasterlibrary.shiri.service.ApiConstants;
+import com.faraz.toasterlibrary.shiri.service.ApiService;
+import com.faraz.toasterlibrary.shiri.service.RequestInterceptor;
 import com.faraz.toasterlibrary.service.StringAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

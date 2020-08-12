@@ -1,7 +1,5 @@
-package com.faraz.toasterlibrary.base.service
+package com.faraz.toasterlibrary.shiri.service
 
-import com.faraz.toasterlibrary.shiri.service.RequestInterceptor
-import com.faraz.toasterlibrary.shiri.service.StringAdapter
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

@@ -1,7 +1,6 @@
 package com.faraz.toasterlibrary.service
 
-import com.faraz.toasterlibrary.service.ApiConstants.Companion.BASE_URL
-import com.faraz.toasterlibrary.service.ApiService
+import com.faraz.toasterlibrary.shiri.service.RequestInterceptor
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

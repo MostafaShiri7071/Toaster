@@ -1,9 +1,11 @@
 package com.faraz.toasterlibrary
 
+import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import okhttp3.ResponseBody
 
 
@@ -77,7 +79,7 @@ open class CallApi<T> : BaseShiri<T>() {
         return abc
     }
 */
-    open fun <T>  deal(resultType: Class<T>,baseUrl: String?,body: Class<*>,functionResult: (T) -> Unit,functionError: (String) -> Unit,result:Class<*>) {
+    open fun deal(resultType: Class<T>,baseUrl: String?,body: Class<*>,functionResult: (T) -> Unit,functionError: (String) -> Unit,result:Class<*>) {
         disposable.add(createService(body::class.java)?.userShiri<T>(baseUrl)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())!!.subscribeWith(object : DisposableSingleObserver<T>() {
@@ -91,6 +93,25 @@ open class CallApi<T> : BaseShiri<T>() {
 
                 })
         )
+    }
+
+    open fun dealNew(resultType: Class<Any>,baseUrl: String?,body: Class<*>,functionResult: (Any) -> Unit,functionError: (String) -> Unit,result:Class<*>) {
+        val servoce=createService(resultType)?.userShiriNew(baseUrl)
+        servoce?.subscribeOn(Schedulers.newThread())?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(object:Observer<Any>{
+                override fun onComplete() {
+
+                }
+
+                override fun onSubscribe(d: Disposable) {}
+
+                override fun onNext(t: Any) {
+                    functionResult.invoke(t)
+                }
+
+                override fun onError(e: Throwable) {}
+
+            })
     }
 
     fun dispose() {

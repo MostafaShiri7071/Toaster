@@ -2,11 +2,7 @@ package com.faraz.toasterlibrary
 
 import com.faraz.toasterlibrary.service.ApiService
 import com.faraz.toasterlibrary.service.ServiceFactory
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
-import okhttp3.ResponseBody
 
 abstract class BaseShiri<T>{
 

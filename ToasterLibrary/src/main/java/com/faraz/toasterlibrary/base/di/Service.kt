@@ -1,7 +1,7 @@
 package com.faraz.toasterlibrary.base.di
 
 import android.app.Application
-import com.faraz.toasterlibrary.service.ApiService
+import com.faraz.toasterlibrary.shiri.service.ApiService
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
