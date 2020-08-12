@@ -88,6 +88,46 @@ class CallApiNew: MyBaee() {
 
             })
     }
+
+    fun  dealPost(body:Class<*>,baseUrl: String?,functionResult: (JsonElement) -> Unit,functionError: (String) -> Unit) {
+        val servoce=createService(Void::class.java).userPost(baseUrl,body::class.java)
+        servoce.subscribeOn(Schedulers.newThread())?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(object: Observer<JsonElement> {
+                override fun onComplete() {
+                }
+
+                override fun onSubscribe(d: Disposable) {}
+
+                override fun onNext(t: JsonElement) {
+                    functionResult.invoke(t)
+                }
+
+                override fun onError(e: Throwable) {
+                    e.message?.let { functionError.invoke(it) }
+                }
+
+            })
+    }
+
+    fun  dealPostNew(body:Class<*>,baseUrl: String?,functionResult: (JsonElement) -> Unit,functionError: (String) -> Unit) {
+        val servoce=createService(body).userPost(baseUrl,body::class.java)
+        servoce.subscribeOn(Schedulers.newThread())?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(object: Observer<JsonElement> {
+                override fun onComplete() {
+                }
+
+                override fun onSubscribe(d: Disposable) {}
+
+                override fun onNext(t: JsonElement) {
+                    functionResult.invoke(t)
+                }
+
+                override fun onError(e: Throwable) {
+                    e.message?.let { functionError.invoke(it) }
+                }
+
+            })
+    }
 }
 
 

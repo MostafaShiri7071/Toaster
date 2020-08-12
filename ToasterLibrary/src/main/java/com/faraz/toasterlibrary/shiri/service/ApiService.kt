@@ -21,4 +21,7 @@ interface ApiService{
     @GET
     fun user(@Url url: String?): Observable<JsonElement>
 
+    @Headers("User-Agent: <god>")
+    @POST
+    fun userPost(@Url url: String?,@Body body:Class<*>): Observable<JsonElement>
 }

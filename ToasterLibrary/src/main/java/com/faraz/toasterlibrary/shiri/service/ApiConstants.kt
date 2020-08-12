@@ -4,6 +4,7 @@ class ApiConstants {
 
     companion object {
         //var BASE_URL = "https://reqres.in/api/"
-        var BASE_URL = "http://crm.poyagroup.com/service/"
+        //var BASE_URL = "http://crm.poyagroup.com/service/"
+        val BASE_URL = "https://service.idabir.com/api/"
     }
 }
