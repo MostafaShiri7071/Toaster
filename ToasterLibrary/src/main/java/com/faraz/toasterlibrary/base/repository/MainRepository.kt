@@ -16,7 +16,7 @@ class MainRepository(private val apiService: ApiService){
     var success = MutableLiveData<String>()
     var data = MutableLiveData<Resource<String>>()
     //val turnoverNew = MutableLiveData<Resource<TurnoverResponse>>()
-
+/*
     fun call(url:String){
         //A value of 0 means a loading start
         data.postValue(Resource.loading("0"))
@@ -43,7 +43,7 @@ class MainRepository(private val apiService: ApiService){
                 }
             })
     }
-/*
+
     fun callNew(result:Class<*>,url:String){
         //A value of 0 means a loading start
         val a:String?=null
